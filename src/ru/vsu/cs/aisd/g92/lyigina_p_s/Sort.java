@@ -12,26 +12,27 @@ public class Sort {
             heapSort(data, start, end);
         } else {
             T pivot;
-            T a = data[start];
-            T b = data[(start + end) / 2];
-            T c = data[end];
-            if (a.compareTo(b) > 0) {
-                if (a.compareTo(c) > 0) {
-                    if (b.compareTo(c) > 0)
-                        pivot = b;
+            int p;
+            int a = start;
+            int b = (start + end) / 2;
+            int c = end;
+            if (data[a].compareTo(data[b]) > 0) {
+                if (data[a].compareTo(data[c]) > 0) {
+                    if (data[b].compareTo(data[c]) > 0)
+                        p = b;
                     else
-                        pivot = c;
+                        p = c;
                 } else
-                    pivot = a;
-            } else if (a.compareTo(c) < 0) {
-                if (b.compareTo(c) > 0)
-                    pivot = b;
+                    p = a;
+            } else if (data[a].compareTo(data[c]) < 0) {
+                if (data[b].compareTo(data[c]) > 0)
+                    p = b;
                 else
-                    pivot = c;
+                    p = c;
             } else
-                pivot = a;
-
-            swap(pivot, data[end]);
+                p = a;
+            pivot = data[p];
+            swap(data, p, end);
             int l = start;
             int r = end - 1;
             while (l < r) {
@@ -42,9 +43,9 @@ public class Sort {
                     r--;
                 }
                 if (l < r)
-                    swap(data[l], data[r]);
+                    swap(data, l, r);
             }
-            swap(data[l], pivot);
+            swap(data, l, end);
             introSort(data, start, r, maxDepth-1);
             introSort(data, l+1, end, maxDepth-1);
         }
@@ -58,9 +59,9 @@ public class Sort {
 
     }
 
-    private static <T> void swap(T a, T b) {
-        T tmp = a;
-        a = b;
-        b = tmp;
+    private static <T> void swap(T[] data, int a, int b) {
+        T tmp = data[a];
+        data[a] = data[b];
+        data[b] = tmp;
     }
 }
