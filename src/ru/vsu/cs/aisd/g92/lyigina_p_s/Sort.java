@@ -2,7 +2,7 @@ package ru.vsu.cs.aisd.g92.lyigina_p_s;
 
 public class Sort {
     public static <T extends Comparable<T>> void sort(T[] data) {
-        introSort(data, 0, data.length-1, Math.log(data.length)/Math.log(2));
+        introSort(data, 0, data.length-1, Math.log(data.length)/Math.log(2)-4);
     }
 
     private static <T extends Comparable<T>> void introSort(T[] data, int start, int end, double maxDepth) {
